@@ -25,7 +25,7 @@ public class MenuController {
     @ApiOperation("新增")
     @PostMapping
     public BaseResponse<Long> post() {
-        return new BaseResponse<>(10L);
+        return new BaseResponse<>(11L);
     }
 
     @ApiOperation("删除")
