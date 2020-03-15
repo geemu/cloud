@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: @env@
+  application:
+    name: @project.artifactId@
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: app-config
+      name: app-gateway
+      fail-fast: true
+      profile: @env@
+    gateway:
+      discovery:
+        locator:
+          enabled: true

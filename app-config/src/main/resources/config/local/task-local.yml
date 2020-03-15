@@ -1,0 +1,6 @@
+app:
+  qq:
+    app-id: 00101577560
+    app-key: b74b3fdad268cd6b4ac9dbba278174eb
+    oauth-server-url: https://graph.qq.com/
+    call-back-url: http://cloud.chenfangming.com/call_back/qq

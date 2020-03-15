@@ -1,0 +1,19 @@
+# 公共配置
+spring:
+  datasource:
+    name: 主库
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/backend?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true
+    username: root
+    password: Chen1436863821.
+  redis:
+    host: 47.97.215.198
+    port: 6379
+    password: Boy.cfm*#520.
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+  jackson:
+    default-property-inclusion: non_null

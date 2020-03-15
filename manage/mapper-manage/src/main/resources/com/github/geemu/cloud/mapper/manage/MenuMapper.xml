@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.geemu.cloud.mapper.manage.MenuMapper">
+
+    <resultMap id="MenuMap" type="com.github.geemu.cloud.model.manage.entity.MenuEntity">
+        <id column="menu_id" property="menuId"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="name" property="name"/>
+        <result column="type" property="type"/>
+        <result column="method" property="method"/>
+        <result column="pattern" property="pattern"/>
+        <result column="operate" property="operate"/>
+        <result column="sort" property="sort"/>
+        <result column="remark" property="remark"/>
+        <result column="enabled" property="enabled"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <resultMap id="MappingBaseResultMap" type="com.github.geemu.cloud.model.manage.entity.view.MenuRoleView" extends="MenuMap">
+        <collection property="roleList" ofType="com.github.geemu.cloud.model.manage.entity.RoleEntity">
+            <id column="role_id" property="roleId"/>
+            <result column="role_name" property="roleName"/>
+            <result column="role_enabled" property="enabled"/>
+            <result column="role_create_user" property="createUser"/>
+            <result column="role_create_time" property="createTime"/>
+            <result column="role_update_user" property="updateUser"/>
+            <result column="role_update_time" property="updateTime"/>
+        </collection>
+    </resultMap>
+
+</mapper>

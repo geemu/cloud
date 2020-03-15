@@ -1,0 +1,16 @@
+server:
+  port: 8760
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+    ip-address: 127.0.0.1
+  server:
+    enable-self-preservation: false # 关闭保护机制,以确保注册中心将不可用的实例正确剔除
+    eviction-interval-timer-in-ms: 5000 # 清理失效服务的间隔,单位毫秒
+  client:
+    fetch-registry: false # 指示此客户端是否应从Eureka获取Eureka注册表信息 集群的时候开启
+    register-with-eureka: true # 指示此实例是否应向Eureka注册其信息
+    service-url:
+      defaultZone: http://127.0.0.1:${server.port}/eureka

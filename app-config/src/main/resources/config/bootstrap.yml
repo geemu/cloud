@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: native
+    include:  @env@
+  application:
+    name: @project.artifactId@
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/config/@env@
