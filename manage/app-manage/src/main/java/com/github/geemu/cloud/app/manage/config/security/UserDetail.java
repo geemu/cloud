@@ -1,7 +1,6 @@
 package com.github.geemu.cloud.app.manage.config.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.github.geemu.cloud.app.manage.config.test.MySimpleGrantedAuthority;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

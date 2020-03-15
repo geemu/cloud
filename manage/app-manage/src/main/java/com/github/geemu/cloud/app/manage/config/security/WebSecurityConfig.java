@@ -1,11 +1,7 @@
 package com.github.geemu.cloud.app.manage.config.security;
 
 
-import com.github.geemu.cloud.app.manage.service.RoleMenuService;
-import com.github.geemu.cloud.app.manage.service.RoleService;
-import com.github.geemu.cloud.app.manage.service.UserRoleService;
-import com.github.geemu.cloud.app.manage.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -27,24 +23,17 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
  */
 @Configuration
 @EnableWebSecurity
+@AllArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    /** 用户服务 **/
-    @Autowired private UserService userService;
-    /** 角色服务 **/
-    @Autowired private RoleService roleService;
-    /** 用户角色服务 **/
-    @Autowired private UserRoleService userRoleService;
-    /** 角色权限服务 **/
-    @Autowired private RoleMenuService roleMenuService;
     /** 自定义加载用户 **/
-    @Autowired private UserDetailsService userDetailsService;
+    private UserDetailsService userDetailsService;
     /** 异常处理 **/
-    @Autowired private Handler handler;
+    private Handler handler;
     /** 资源加载 **/
-    @Autowired private FilterInvocationSecurityMetadataSource metadataSource;
+    private FilterInvocationSecurityMetadataSource metadataSource;
     /** 权限校验 **/
-    @Autowired private AccessDecisionManager accessDecisionManager;
+    private AccessDecisionManager accessDecisionManager;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -63,10 +52,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity webSecurity) {
         webSecurity
                 .ignoring()
-                .mvcMatchers(HttpMethod.GET, "/static/**", "/favicon.ico");
+                .mvcMatchers(HttpMethod.GET,
+                        "index.html",
+                        "js/**",
+                        "css/**",
+                        "img/**",
+                        "/favicon.ico",
+                        "/swagger-ui.html",
+                        "/webjars/**",
+                        "/swagger-resources/**",
+                        "/swagger/**",
+                        "/v2/api-docs/**");
 
     }
-
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -94,6 +92,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().successHandler(handler).failureHandler(handler);
 
     }
-
 
 }

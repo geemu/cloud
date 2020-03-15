@@ -3,10 +3,10 @@ package com.github.geemu.cloud.app.manage.config.security;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.geemu.cloud.base.entity.BaseResponse;
 import com.github.geemu.cloud.base.entity.BaseResponseState;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.AccessDeniedException;
@@ -27,7 +27,6 @@ import java.io.IOException;
 
 /**
  * 处理器
- * haor
  * @author 陈方明  cfmmail@sina.com
  * @since 2020-03-10 23:03
  */
@@ -35,10 +34,11 @@ import java.io.IOException;
 @Slf4j
 @Builder
 @Component
+@AllArgsConstructor
 public class Handler implements AuthenticationSuccessHandler, AuthenticationFailureHandler, AccessDeniedHandler, AuthenticationEntryPoint, LogoutSuccessHandler {
 
     /** 序列化 **/
-    @Autowired private ObjectMapper objectMapper;
+    private ObjectMapper objectMapper;
 
     /**
      * 未登录用户拒绝访问受保护资源处理器

@@ -1,4 +1,4 @@
-package com.github.geemu.cloud.app.manage.config.test;
+package com.github.geemu.cloud.app.manage.config.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
@@ -10,17 +10,12 @@ import org.springframework.security.core.SpringSecurityCoreVersion;
  */
 public class MySimpleGrantedAuthority implements GrantedAuthority {
 
-
     private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
     private String authority;
 
     public MySimpleGrantedAuthority(String authority) {
         this.authority = authority;
-    }
-
-    public MySimpleGrantedAuthority() {
-
     }
 
     @Override

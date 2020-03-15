@@ -1,16 +1,15 @@
 package com.github.geemu.cloud.app.manage.config.security;
 
-import com.github.geemu.cloud.app.manage.config.test.MySimpleGrantedAuthority;
 import com.github.geemu.cloud.app.manage.service.RoleService;
 import com.github.geemu.cloud.app.manage.service.UserRoleService;
 import com.github.geemu.cloud.app.manage.service.UserService;
 import com.github.geemu.cloud.base.StringUtils;
 import com.github.geemu.cloud.model.manage.entity.RoleEntity;
 import com.github.geemu.cloud.model.manage.entity.UserEntity;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -31,14 +30,15 @@ import java.util.stream.Collectors;
 @Builder
 @Primary
 @Component
+@AllArgsConstructor
 public class UserDetailService implements UserDetailsService {
 
     /** 用户操作 **/
-    @Autowired private UserService userService;
+    private UserService userService;
     /** 角色操作 **/
-    @Autowired private RoleService roleService;
+    private RoleService roleService;
     /** 用户角色关联操作 **/
-    @Autowired private UserRoleService userRoleService;
+    private UserRoleService userRoleService;
 
     /**
      * 据用户名查找用户

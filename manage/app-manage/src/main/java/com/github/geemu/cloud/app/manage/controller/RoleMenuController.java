@@ -2,41 +2,48 @@ package com.github.geemu.cloud.app.manage.controller;
 
 import com.github.geemu.cloud.base.entity.BaseResponse;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 系统管理
+ * 角色资源关联管理
  * @author 陈方明  cfmmail@sina.com
- * @since 2020-03-13 23:57
+ * @since 2020-03-15 18:16
  */
 @Slf4j
 @RestController
-@Api(tags = "系统管理")
-public class SysController {
+@RequestMapping("sys/role-menu")
+@Api(tags = {"系统管理", "角色资源关联管理"})
+public class RoleMenuController {
 
-    @PostMapping("user")
+    @ApiOperation("新增")
+    @PostMapping
     public BaseResponse<Long> post() {
         return new BaseResponse<>(10L);
     }
 
-    @DeleteMapping("user")
+    @ApiOperation("删除")
+    @DeleteMapping
     public BaseResponse<Void> delete() {
         return new BaseResponse<>();
     }
 
-    @PutMapping("user")
+    @ApiOperation("修改")
+    @PutMapping
     public BaseResponse<Void> put() {
         return new BaseResponse<>();
     }
 
-    @GetMapping("user")
+    @ApiOperation("查询")
+    @GetMapping
     public BaseResponse<String> get() {
-        return new BaseResponse<>("这是用户信息");
+        return new BaseResponse<>("这是角色资源关联信息");
     }
 
 }

@@ -4,10 +4,10 @@ import com.github.geemu.cloud.app.manage.service.RoleMenuService;
 import com.github.geemu.cloud.app.manage.service.RoleService;
 import com.github.geemu.cloud.model.manage.entity.RoleEntity;
 import com.github.geemu.cloud.model.manage.entity.view.MenuRoleView;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
@@ -32,14 +32,15 @@ import java.util.stream.Collectors;
 @Slf4j
 @Builder
 @Component
+@AllArgsConstructor
 public class MetadataSource implements FilterInvocationSecurityMetadataSource {
 
     /** 路由匹配 **/
     private static final AntPathMatcher ANT_PATH_MATCHER = new AntPathMatcher();
     /** 角色资源关联操作 **/
-    @Autowired private RoleMenuService roleMenuService;
+    private RoleMenuService roleMenuService;
     /** 角色操作 **/
-    @Autowired private RoleService roleService;
+    private RoleService roleService;
 
     /**
      * 能够访问当前资源的角色列表
