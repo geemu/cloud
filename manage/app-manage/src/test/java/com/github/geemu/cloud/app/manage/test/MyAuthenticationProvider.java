@@ -1,4 +1,4 @@
-//package com.github.geemu.cloud.app.manage.config.test;
+//package com.github.geemu.cloud.app.manage.test;
 //
 //import lombok.Data;
 //import lombok.extern.slf4j.Slf4j;

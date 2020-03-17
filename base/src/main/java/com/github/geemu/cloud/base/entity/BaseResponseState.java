@@ -22,6 +22,10 @@ public enum BaseResponseState implements ResponseState {
     BAD_REQUEST_400000(400000, "客户端请求参数缺失"),
     /** 客户端请求参数校验不通过 **/
     BAD_REQUEST_400001(400001, "客户端请求参数校验不通过"),
+    /** 用户已存在 **/
+    BAD_REQUEST_400002(400002, "用户已存在"),
+    /** 用户不存在 **/
+    BAD_REQUEST_400003(400003, "用户不存在"),
 
 
     /** 未认证 **/

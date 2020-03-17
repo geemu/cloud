@@ -1,9 +1,13 @@
 package com.github.geemu.cloud.app.manage.config;
 
 
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.List;
 
 /**
  * Swagger资源文件映射
@@ -11,7 +15,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @since 2019-06-10 21:30
  */
 @Configuration
-public class SwaggerResourceConfig implements WebMvcConfigurer {
+@AllArgsConstructor
+public class MvcConfig implements WebMvcConfigurer {
+
+    private CurrentUserMethodArgumentResolver currentUserMethodArgumentResolver;
 
     /**
      * 资源映射
@@ -47,6 +54,15 @@ public class SwaggerResourceConfig implements WebMvcConfigurer {
 
         registry.addResourceHandler("img/**")
                 .addResourceLocations("classpath:/static/img/");
+    }
+
+    /**
+     * 自定义绑定
+     * @param resolvers resolvers
+     */
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+        resolvers.add(currentUserMethodArgumentResolver);
     }
 
 }

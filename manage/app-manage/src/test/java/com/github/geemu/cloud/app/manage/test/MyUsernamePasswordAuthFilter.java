@@ -1,4 +1,4 @@
-//package com.github.geemu.cloud.app.manage.config.test;
+//package com.github.geemu.cloud.app.manage.test;
 //
 //import org.springframework.security.authentication.AuthenticationServiceException;
 //import org.springframework.security.core.Authentication;

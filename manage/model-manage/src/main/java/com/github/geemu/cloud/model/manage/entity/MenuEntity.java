@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 
 
 /**
- * 权限数据表
+ * 资源数据表
  * @author 陈方明  cfmmail@sina.com
  * @since 2018-10-25 20:36
  */
@@ -27,7 +27,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Accessors(chain = true)
 @ToString(callSuper = true)
-@ApiModel("权限数据表")
+@ApiModel("资源数据表")
 @TableName("backend_menu")
 public class MenuEntity {
 
