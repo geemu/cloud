@@ -9,6 +9,10 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
+import javax.validation.Payload;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 /**
  * 用户新增
  * @author 陈方明  cfmmail@sina.com
@@ -21,13 +25,21 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @ToString(callSuper = true)
 @ApiModel("用户新增")
-public class UserAdd {
+public class UserAddReq {
 
+    @NotNull(message = "用户名不能为空", payload = Uuuuu.class)
+    @NotBlank(message = "用户名不能为空")
     @ApiModelProperty("用户名  忽略大小写")
     private String username;
     @ApiModelProperty("备注")
     private String remark;
     @ApiModelProperty("是否启用 true:启用、false:禁用")
     private Boolean enabled;
+
+    static class Uuuuu implements Payload {
+
+        private String aaaaa = "aa";
+
+    }
 
 }

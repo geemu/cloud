@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.List;
 
 /**
- * Swagger资源文件映射
+ * MVC配置
  * @author 陈方明  cfmmail@sina.com
  * @since 2019-06-10 21:30
  */

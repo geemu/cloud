@@ -1,12 +1,14 @@
 package com.github.geemu.cloud.app.manage.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.geemu.cloud.base.CollectionUtils;
 import com.github.geemu.cloud.mapper.manage.MenuMapper;
 import com.github.geemu.cloud.model.manage.entity.MenuEntity;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -23,17 +25,20 @@ public class MenuService {
 
     /**
      * 根据资源id列表,查询有效资源列表
-     * @param ids 资源id列表
+     * @param menuIds 资源id列表
      * @return 有效的资源列表
      */
-    public List<MenuEntity> findByIds(List<Long> ids) {
+    public List<MenuEntity> findByIds(List<Long> menuIds) {
+        if (CollectionUtils.isEmpty(menuIds)) {
+            return Collections.emptyList();
+        }
         MenuEntity entity = MenuEntity
                 .builder()
                 .enabled(Boolean.TRUE)
                 .build();
         QueryWrapper<MenuEntity> query = new QueryWrapper<>();
         query.setEntity(entity);
-        query.in("menu_id", ids);
+        query.in("menu_id", menuIds);
         return menuMapper.selectList(query);
     }
 

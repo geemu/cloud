@@ -26,6 +26,8 @@ public enum BaseResponseState implements ResponseState {
     BAD_REQUEST_400002(400002, "用户已存在"),
     /** 用户不存在 **/
     BAD_REQUEST_400003(400003, "用户不存在"),
+    /** 用户不存在 **/
+    BAD_REQUEST_400004(400004, "参数绑定异常"),
 
 
     /** 未认证 **/
@@ -48,7 +50,6 @@ public enum BaseResponseState implements ResponseState {
 
     /** 请求路径不存在 **/
     NOF_FOUND_404000(404000, "请求路径不存在"),
-
 
     /** 通用服务端异常 **/
     INTERNAL_SERVER_ERROR_500000(500000, "服务器未知异常");

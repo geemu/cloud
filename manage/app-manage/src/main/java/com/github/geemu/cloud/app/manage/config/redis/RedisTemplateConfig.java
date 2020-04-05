@@ -25,9 +25,9 @@ public class RedisTemplateConfig {
      * @param json json
      */
     @Bean("redisTemplate")
-    public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory connectionFactory, StringRedisSerializer string, Jackson2JsonRedisSerializer<Object> json) {
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory, StringRedisSerializer string, Jackson2JsonRedisSerializer<Object> json) {
         log.info("初始化:RedisTemplate");
-        RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(connectionFactory);
         redisTemplate.setDefaultSerializer(json);
         redisTemplate.setKeySerializer(string);

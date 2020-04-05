@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
@@ -34,6 +35,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private AccessDecisionManager accessDecisionManager;
     /** 加密器 **/
     private PasswordEncoder passwordEncoder;
+    /** SESSION管理 **/
+    private SessionRegistry sessionRegistry;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -48,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         webSecurity
                 .ignoring()
                 .mvcMatchers(HttpMethod.GET,
-                        "index.html",
+                        "/**.html",
                         "js/**",
                         "css/**",
                         "img/**",
@@ -75,6 +78,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.headers().httpPublicKeyPinning().disable();
         httpSecurity.exceptionHandling().accessDeniedHandler(handler).authenticationEntryPoint(handler);
         httpSecurity.logout().clearAuthentication(Boolean.TRUE).logoutSuccessHandler(handler);
+        httpSecurity.sessionManagement().maximumSessions(1).sessionRegistry(sessionRegistry);
         httpSecurity
                 .authorizeRequests()
                 .withObjectPostProcessor(ObjectPostHandler

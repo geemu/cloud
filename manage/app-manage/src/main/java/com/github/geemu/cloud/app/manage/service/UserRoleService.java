@@ -28,7 +28,7 @@ public class UserRoleService {
      * @param userId 用户id
      * @return 有效关联角色id列表
      */
-    public List<Long> findRoleIdsByUserId(Long userId) {
+    public List<Long> findRoleIdsByUserId(long userId) {
         UserRoleEntity entity = UserRoleEntity
                 .builder()
                 .userId(userId)

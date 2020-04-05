@@ -49,21 +49,21 @@ public class Handler implements AuthenticationSuccessHandler, AuthenticationFail
      */
     @Override
     public void commence(HttpServletRequest httpReq, HttpServletResponse httpResp, AuthenticationException e) throws IOException {
-        writeJson(httpResp, BaseResponseState.AUTHENTICATION_000, objectMapper);
+        writeJson(httpResp, new BaseResponse<>(BaseResponseState.AUTHENTICATION_000), objectMapper);
     }
 
     /**
      * 输出json
      * @param httpResp httpResp
-     * @param baseResponseState baseResponseState
+     * @param baseResponse baseResponseState
      * @throws IOException IOException
      */
-    private static void writeJson(HttpServletResponse httpResp, BaseResponseState baseResponseState, ObjectMapper objectMapper) throws IOException {
+    private static <T> void writeJson(HttpServletResponse httpResp, BaseResponse<T> baseResponse, ObjectMapper objectMapper) throws IOException {
         if (httpResp.isCommitted()) {
             return;
         }
         httpResp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE);
-        String json = objectMapper.writeValueAsString(new BaseResponse<>(baseResponseState));
+        String json = objectMapper.writeValueAsString(baseResponse);
         httpResp.getWriter().print(json);
         httpResp.getWriter().flush();
         httpResp.getWriter().close();
@@ -82,7 +82,7 @@ public class Handler implements AuthenticationSuccessHandler, AuthenticationFail
         if (null != session) {
             session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
         }
-        writeJson(httpResp, BaseResponseState.SUCCESS_200000, objectMapper);
+        writeJson(httpResp, new BaseResponse<>(httpReq.getSession().getId()), objectMapper);
     }
 
     /**
@@ -94,7 +94,7 @@ public class Handler implements AuthenticationSuccessHandler, AuthenticationFail
      */
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpReq, HttpServletResponse httpResp, AuthenticationException e) throws IOException {
-        writeJson(httpResp, BaseResponseState.AUTHENTICATION_004, objectMapper);
+        writeJson(httpResp, new BaseResponse<>(BaseResponseState.AUTHENTICATION_004), objectMapper);
     }
 
     /**
@@ -111,7 +111,7 @@ public class Handler implements AuthenticationSuccessHandler, AuthenticationFail
         }
         UserDetail currentUser = SecurityUtils.getCurrentUser();
         log.warn("鉴权不通过,用户:[{}],试图访问无权限资源:[{}]", null != currentUser ? currentUser.getUsername() : null, httpReq.getMethod() + ":" + httpReq.getRequestURI());
-        writeJson(httpResp, BaseResponseState.AUTHORIZATION_403000, objectMapper);
+        writeJson(httpResp, new BaseResponse<>(BaseResponseState.AUTHORIZATION_403000), objectMapper);
     }
 
     /**
@@ -123,7 +123,7 @@ public class Handler implements AuthenticationSuccessHandler, AuthenticationFail
      */
     @Override
     public void onLogoutSuccess(HttpServletRequest httpReq, HttpServletResponse httpResp, Authentication e) throws IOException {
-        writeJson(httpResp, BaseResponseState.SUCCESS_200000, objectMapper);
+        writeJson(httpResp, new BaseResponse<>(), objectMapper);
     }
 
 }

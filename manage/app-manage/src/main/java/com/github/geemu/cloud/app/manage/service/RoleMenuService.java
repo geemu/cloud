@@ -1,6 +1,7 @@
 package com.github.geemu.cloud.app.manage.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.geemu.cloud.base.CollectionUtils;
 import com.github.geemu.cloud.mapper.manage.RoleMenuMapper;
 import com.github.geemu.cloud.model.manage.entity.MenuEntity;
 import com.github.geemu.cloud.model.manage.entity.RoleEntity;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,6 +35,9 @@ public class RoleMenuService {
      * @return 有效的关联资源id列表
      */
     public List<Long> findByRoleIds(List<Long> roleIds) {
+        if (CollectionUtils.isEmpty(roleIds)) {
+            return Collections.emptyList();
+        }
         RoleMenuEntity entity = RoleMenuEntity
                 .builder()
                 .enabled(Boolean.TRUE)
