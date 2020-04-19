@@ -19,7 +19,6 @@
     </div>
 </template>
 <script type="text/ecmascript-6">
-    import {postForm, postJson} from "../utils/httpClient";
 
     export default {
         name: 'Login',
@@ -41,30 +40,18 @@
                 this.$refs[formName]
                     .validate(valid => {
                         if (!valid) {
+                            console.log('login valid error')
                             return false;
                         }
                         this.loading = true
-                        setTimeout(
-                            () => {
+                        this.$store.dispatch('login', this.loginForm)
+                            .then(({}) => {
+                                this.$router.push('/home');
                                 this.loading = false
-                                this.$store.commit('login', 'true')
-                                this.$router.push({path: '/'})
-                            }, 1000
-                        );
-                        postForm({
-                            url:'/login',
-                            data:{
-                                'username': this.loginForm.username,
-                                'password': this.loginForm.password
-                            }
-                        }).then(({response}) => {
-                            if (data && data.code === 0) {
-                                this.$cookie.set(this.$Settings.authTokenKey, response.data)
-                                this.$router.replace({name: 'home'})
-                            } else {
-                                this.$message.error(data.msg)
-                            }
-                        });
+                            })
+                            .catch(() => {
+                                this.loading = false
+                            });
                     })
             },
         }

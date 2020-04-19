@@ -1,8 +1,10 @@
 module.exports = {
+    baseURL: '',
     // 端口号
     port: 8080,
     // Token名称
     authTokenKey: 'X-AUTH-TOKEN',
+    withCredentials: true,
     /**
      * @description 网站标题
      */
