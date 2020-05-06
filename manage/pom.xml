@@ -15,9 +15,10 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>model-manage</module>
-        <module>mapper-manage</module>
-        <module>app-manage</module>
+        <module>manage-app</module>
+        <module>manage-domain</module>
+        <module>manage-mapper</module>
+        <module>manage-entity</module>
     </modules>
 
 </project>

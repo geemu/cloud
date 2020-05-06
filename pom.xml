@@ -122,12 +122,17 @@
             </dependency>
             <dependency>
                 <groupId>com.github.geemu</groupId>
-                <artifactId>mapper-manage</artifactId>
+                <artifactId>manage-domain</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.geemu</groupId>
-                <artifactId>model-manage</artifactId>
+                <artifactId>manage-mapper</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.geemu</groupId>
+                <artifactId>manage-entity</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
