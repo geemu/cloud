@@ -3,6 +3,7 @@ package com.github.geemu.cloud.manage.app.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.geemu.cloud.base.entity.BaseResponseState;
 import com.github.geemu.cloud.base.exception.BizException;
+import com.github.geemu.cloud.manage.app.config.security.UserDetail;
 import com.github.geemu.cloud.manage.entity.UserEntity;
 import com.github.geemu.cloud.manage.mapper.UserMapper;
 import lombok.AllArgsConstructor;
@@ -44,14 +45,12 @@ public class UserService {
 
     /**
      * 新增一名用户
-     * @param username 用户名
-     * @param remark 备注
-     * @param enabled 启用
-     * @param createUser 创建人
+     * @param userEntity 用户
+     * @param user 用户
      * @return 用户id主键
      */
-    public Long add(String username, String remark, boolean enabled, String createUser) {
-        if (exist(username)) {
+    public Long add(UserEntity userEntity, UserDetail user) {
+        if (exist(userEntity.getUsername())) {
             throw new BizException(BaseResponseState.BAD_REQUEST_400002);
         }
         LocalDateTime now = LocalDateTime.now();
@@ -59,13 +58,13 @@ public class UserService {
         log.info("随机密码为:{}", password);
         UserEntity entity = UserEntity
                 .builder()
-                .username(username)
+                .username(userEntity.getUsername())
                 .password(passwordEncoder.encode(password))
-                .remark(remark)
-                .enabled(enabled)
-                .createUser(createUser)
+                .remark(userEntity.getRemark())
+                .enabled(userEntity.getEnabled())
+                .createUser(user.getUsername())
                 .createTime(now)
-                .updateUser(createUser)
+                .updateUser(user.getUsername())
                 .updateTime(now)
                 .build();
         int id = userMapper.insert(entity);

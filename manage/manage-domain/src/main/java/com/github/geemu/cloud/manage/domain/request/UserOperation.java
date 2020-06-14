@@ -1,6 +1,5 @@
 package com.github.geemu.cloud.manage.domain.request;
 
-import com.github.geemu.cloud.base.validate.UpdateGroup;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -13,7 +12,6 @@ import lombok.experimental.Accessors;
 import javax.validation.Payload;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 
 /**
  * 用户操作实体
@@ -29,7 +27,6 @@ import javax.validation.constraints.Null;
 @ApiModel("用户新增")
 public class UserOperation {
 
-    @Null(message = "主键必须为空", groups = {UpdateGroup.class})
     @NotNull(message = "用户名不能为空", payload = Uuuuu.class)
     @NotBlank(message = "用户名不能为空")
     @ApiModelProperty("用户名  忽略大小写")

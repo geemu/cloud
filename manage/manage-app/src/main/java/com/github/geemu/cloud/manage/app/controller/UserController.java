@@ -2,7 +2,11 @@ package com.github.geemu.cloud.manage.app.controller;
 
 import com.github.geemu.cloud.base.entity.BaseResponse;
 import com.github.geemu.cloud.manage.app.config.annotation.CurrentUser;
+import com.github.geemu.cloud.manage.app.config.log.SysLog;
+import com.github.geemu.cloud.manage.app.config.log.SysModule;
+import com.github.geemu.cloud.manage.app.config.log.SysOperation;
 import com.github.geemu.cloud.manage.app.config.security.UserDetail;
+import com.github.geemu.cloud.manage.app.converter.UserConverter;
 import com.github.geemu.cloud.manage.app.service.UserService;
 import com.github.geemu.cloud.manage.domain.request.UserOperation;
 import com.github.geemu.cloud.manage.entity.UserEntity;
@@ -36,18 +40,21 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("sys/user")
 @Api(tags = {"系统管理", "用户管理"})
+@ApiResponses({@ApiResponse(code = 200000, message = "成功", response = BaseResponse.class)})
 public class UserController {
 
     private final UserService userService;
 
     private final SessionRegistry sessionRegistry;
 
+    private final UserConverter userConverter;
 
-    @ApiResponses({@ApiResponse(code = 200000, message = "成功", response = BaseResponse.class)})
+    @SysLog(module = SysModule.USER_MANAGE, operation = SysOperation.INSERT, value = "新增用户")
     @ApiOperation("新增")
     @PostMapping
-    public BaseResponse<Long> post(@CurrentUser UserDetail user, @Valid UserOperation add) {
-        return new BaseResponse<>(userService.add(add.getUsername(), add.getRemark(), add.getEnabled(), user.getUsername()));
+    public BaseResponse<Long> post(@Valid UserOperation userOperation, @CurrentUser UserDetail user) {
+        UserEntity userEntity = userConverter.userController_Post_In(userOperation);
+        return new BaseResponse<>(userService.add(userEntity, user));
     }
 
     @ApiOperation("删除")
